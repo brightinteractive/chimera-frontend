@@ -15,3 +15,5 @@ function fetchAnnotation() {
 function insertAfter(referenceNode, newNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
+
+window.chimera = chimera
