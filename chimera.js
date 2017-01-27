@@ -1,34 +1,19 @@
 function chimera() {
-  fetchJsonWithCreds('/asset-bank/go/reverse-proxy/features')
-    .then(enabledFeatures => {
-      if (enabledFeatures.enabledFeatures.includes('ANNOTATIONS')) {
-        enableAnnotations();
-      } else {
-        console.log('Feature not enabled')
-      }
-    })
+  const button = document.createElement('button')
+  button.innerHTML = 'Annotation';
+  button.addEventListener('click', fetchAnnotation)
 
-  function fetchJsonWithCreds(url) {
-    return fetch(url, { credentials: 'include' })
-      .then(response => response.json())
-  }
+  insertAfter(document.querySelector('.js-notifications'), button)
+}
 
-  function enableAnnotations() {
-    const button = document.createElement('button')
-    button.innerHTML = 'Annotation';
-    button.addEventListener('click', fetchAnnotation)
+function fetchAnnotation() {
+  fetch('/asset-bank/go/reverse-proxy/annotations/test', { credentials: 'include' })
+    .then(response => response.json())
+    .then(annotation => alert(JSON.stringify(annotation)));
+}
 
-    insertAfter(document.querySelector('.js-notifications'), button)
-  }
-
-  function fetchAnnotation() {
-    fetchJsonWithCreds('/asset-bank/go/reverse-proxy/annotations/test')
-      .then(annotation => alert(JSON.stringify(annotation)));
-  }
-
-  function insertAfter(referenceNode, newNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  }
+function insertAfter(referenceNode, newNode) {
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 chimera()
