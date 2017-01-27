@@ -1,7 +1,7 @@
 function chimera() {
   fetchJsonWithCreds('/asset-bank/go/reverse-proxy/features')
     .then(enabledFeatures => {
-      if (enabledFeatures.features.includes('ANNOTATIONS')) {
+      if (enabledFeatures.enabledFeatures.includes('ANNOTATIONS')) {
         enableAnnotations();
       } else {
         console.log('Feature not enabled')
