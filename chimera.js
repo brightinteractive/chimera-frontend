@@ -22,7 +22,7 @@ function chimera() {
   }
 
   function fetchAnnotation() {
-    fetchJsonWithCreds('/asset-bank/go/reverse-proxy/annotations/test')
+    fetchJsonWithCreds('/asset-bank/go/reverse-proxy/annotations')
       .then(annotation => alert(JSON.stringify(annotation)));
   }
 
