@@ -1,6 +1,5 @@
 function chimera() {
-  fetch('/asset-bank/go/reverse-proxy/features', { credentials: 'include' })
-    .then(response => response.json())
+  fetchJsonWithCreds('/asset-bank/go/reverse-proxy/features')
     .then(enabledFeatures => {
       if (enabledFeatures.features.includes('ANNOTATIONS')) {
         enableAnnotations();
@@ -8,6 +7,11 @@ function chimera() {
         console.log('Feature not enabled')
       }
     })
+
+  function fetchJsonWithCreds(url) {
+    return fetch(url, { credentials: 'include' })
+      .then(response => response.json())
+  }
 
   function enableAnnotations() {
     const button = document.createElement('button')
@@ -18,8 +22,7 @@ function chimera() {
   }
 
   function fetchAnnotation() {
-    fetch('/asset-bank/go/reverse-proxy/annotations/test', { credentials: 'include' })
-      .then(response => response.json())
+    fetchJsonWithCreds('/asset-bank/go/reverse-proxy/annotations/test')
       .then(annotation => alert(JSON.stringify(annotation)));
   }
 
