@@ -1,5 +1,5 @@
 function chimera() {
-  fetch('/asset-bank/go/reverse-proxy/features')
+  fetch('/asset-bank/go/reverse-proxy/features', { credentials: 'include' })
     .then(response => response.json())
     .then(enabledFeatures => {
       if (enabledFeatures.features.includes('ANNOTATIONS')) {
